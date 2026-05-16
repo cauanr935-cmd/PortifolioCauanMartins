@@ -33,12 +33,90 @@ const applyTheme = (theme, themeToggle) => {
     }
 };
 
+const init3DTilt = () => {
+    const cards = document.querySelectorAll('.card-3d');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const distX = mouseX - centerX;
+            const distY = mouseY - centerY;
+            
+            const rotateY = (distX / (rect.width / 2)) * 8;
+            const rotateX = -(distY / (rect.height / 2)) * 8;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            card.style.transition = 'none';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.320, 1)';
+        });
+    });
+};
+
 const getInitialTheme = () => {
     const savedTheme = safeStorage.getItem('site-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
         return savedTheme;
     }
     return prefersDarkMode() ? 'dark' : 'light';
+};
+
+const typewriter = (element, speed = 60) => {
+    const text = element.textContent.trim();
+    element.textContent = '';
+
+    const cursor = document.createElement('span');
+    cursor.className = 'typewriter-cursor';
+    cursor.textContent = '|';
+    element.appendChild(cursor);
+
+    let index = 0;
+    const typeNext = () => {
+        if (index < text.length) {
+            cursor.insertAdjacentText('beforebegin', text.charAt(index));
+            index += 1;
+            setTimeout(typeNext, speed);
+        } else {
+            setTimeout(() => cursor.remove(), 800);
+        }
+    };
+
+    typeNext();
+};
+
+const initTypewriter = () => {
+    const headline = document.querySelector('.hero-headline.typewriter');
+    if (headline) {
+        typewriter(headline);
+    }
+};
+
+const initScrollReveal = () => {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    reveals.forEach(element => revealObserver.observe(element));
 };
 
 const initThemeSwitcher = (themeToggle) => {
@@ -143,6 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initThemeSwitcher(themeToggle);
     applyTheme(getInitialTheme(), themeToggle);
+    initTypewriter();
+    initScrollReveal();
+    init3DTilt();
 
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
