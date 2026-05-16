@@ -243,7 +243,7 @@ body {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     align-items: center;
     gap: 3rem;
 }
@@ -271,13 +271,14 @@ body {
 
 .hero-figure {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .hero-image-wrapper {
     width: 100%;
     max-width: 420px;
+    margin-left: auto;
     border-radius: 32px;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.12);
