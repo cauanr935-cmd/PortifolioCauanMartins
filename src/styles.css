@@ -546,21 +546,33 @@ body {
     font-size: 1.5rem;
 }
 
-.about-contact p {
-    margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.95);
+.contact-links {
+    display: grid;
+    gap: 1rem;
 }
 
-.about-contact a {
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
 }
 
-.about-contact a:hover {
+.contact-link:hover {
     color: var(--bg-white);
-    text-decoration: underline;
+}
+
+.contact-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    flex-shrink: 0;
 }
 
 /* ===== Footer ===== */
