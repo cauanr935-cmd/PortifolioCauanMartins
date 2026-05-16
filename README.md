@@ -1,4 +1,4 @@
-# Portfólio de Cauan Martins
+# Meu Portifólio
 
 Portfolio web estático moderno criado com HTML, CSS e JavaScript puros. Este site apresenta a experiência profissional, projetos, qualificações e certificações de Cauan Martins, com foco em uma experiência visual refinada, interações suaves e design responsivo.
 
