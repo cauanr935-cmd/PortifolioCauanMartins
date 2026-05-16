@@ -13,6 +13,19 @@
     --transition: all 0.3s ease-in-out;
 }
 
+.dark-theme {
+    --primary-color: #60a5fa;
+    --secondary-color: #1e3a8a;
+    --accent-color: #fbbf24;
+    --text-dark: #f8fafc;
+    --text-light: #cbd5e1;
+    --bg-light: #111827;
+    --bg-white: #0f172a;
+    --border-color: #374151;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.35), 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
 /* ===== Reset e Estilos Gerais ===== */
 * {
     margin: 0;
@@ -98,6 +111,32 @@ body {
 }
 
 /* Menu Toggle (Hamburger) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    background-color: var(--bg-light);
+}
+
 .menu-toggle {
     display: none;
     flex-direction: column;

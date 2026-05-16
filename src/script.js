@@ -1,5 +1,6 @@
 // ===== Elementos do DOM =====
 const menuToggle = document.getElementById('menuToggle');
+const themeToggle = document.getElementById('themeToggle');
 const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -96,7 +97,35 @@ const addActiveStyleToNav = () => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', addActiveStyleToNav);
+const applyTheme = (theme) => {
+    document.body.classList.toggle('dark-theme', theme === 'dark');
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        themeToggle.title = theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro';
+    }
+};
+
+const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem('site-theme');
+    if (savedTheme) return savedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+const toggleTheme = () => {
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    localStorage.setItem('site-theme', nextTheme);
+};
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    addActiveStyleToNav();
+    applyTheme(getInitialTheme());
+});
 
 // ===== Efeito de Hover em Cards =====
 const projectCards = document.querySelectorAll('.project-card');
