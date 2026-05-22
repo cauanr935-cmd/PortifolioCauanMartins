@@ -1,30 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+
 /* ===== Variáveis CSS ===== */
 :root {
-    --color-background: #ffffff;
-    --color-surface: #ffffff;
-    --color-surface-soft: rgba(93, 173, 226, 0.12);
-    --color-border: #d6eaf8;
-    --color-primary: #154360;
-    --color-secondary: #5DADE2;
-    --color-highlight: #E67E22;
-    --color-warning: #F1C40F;
-    --color-text: #111111;
-    --color-text-muted: #334155;
-    --color-button-text: #ffffff;
-    --bg-white: var(--color-background);
-    --bg-light: #eff6fb;
-    --text-dark: var(--color-text);
-    --text-light: var(--color-text-muted);
-    --accent-color: var(--color-highlight);
-    --header-bg: rgba(21, 67, 96, 0.08);
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-    --transition: all 0.3s ease-in-out;
-    --high-contrast-bg: #000000;
-    --high-contrast-surface: #111111;
-    --high-contrast-text: #ffffff;
-    --high-contrast-border: #f8f8f8;
-    --high-contrast-accent: #ffff00;
+        --color-background: #ffffff;
+        --color-surface: #ffffff;
+        --color-surface-soft: rgba(93, 173, 226, 0.12);
+        --color-border: #d6eaf8;
+        --color-primary: #154360;
+        --color-secondary: #5DADE2;
+        --color-highlight: #E67E22;
+        --color-warning: #F1C40F;
+        --color-text: #111111;
+        --color-text-muted: #334155;
+        --color-button-text: #ffffff;
+        --bg-white: var(--color-background);
+        --bg-light: #eff6fb;
+        --text-dark: var(--color-text);
+        --text-light: var(--color-text-muted);
+        --accent-color: var(--color-highlight);
+        --header-bg: rgba(21, 67, 96, 0.08);
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+        --transition: all 0.3s ease-in-out;
+        --high-contrast-bg: #000000;
+        --high-contrast-surface: #111111;
+        --high-contrast-text: #ffffff;
+        --high-contrast-border: #f8f8f8;
+        --high-contrast-accent: #ffff00;
+
+        /* Typographic system */
+        --font-title: 'Vanity', serif;
+        --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        --line-height-body: 1.65;
+
+        /* Responsive scale */
+        --step-hero: clamp(2.75rem, 4.5vw + 1.25rem, 5.25rem);
+        --step-h2:   clamp(1.6rem, 2.4vw + 0.6rem, 2.25rem);
+        --step-body: clamp(1rem, 0.45vw + 0.9rem, 1.125rem);
+        --step-small:clamp(0.72rem, 0.35vw + 0.5rem, 0.875rem);
+
+        --title-letter-spacing: -0.02em;
+        --tech-tag-letter-spacing: 0.06em;
+}
+
+/* Vanity local fonts (OTF) */
+@font-face {
+    font-family: 'Vanity';
+    src: url('../assets/fonts/Vanity-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vanity';
+    src: url('../assets/fonts/Vanity-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
 .dark-theme {
@@ -397,6 +429,140 @@ h3 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+}
+
+/* ===== Tipografia por Seção (Vanity + Manrope) ===== */
+
+/* HERO / HEADER */
+.hero .hero-headline,
+.hero-headline,
+header .hero-title {
+    font-family: var(--font-title);
+    font-size: var(--step-hero);
+    font-weight: 700;
+    letter-spacing: var(--title-letter-spacing);
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+}
+
+.hero .hero-copy p,
+.hero .hero-subtitle,
+header .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.2vw + 0.9rem, 1.25rem);
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+}
+
+/* SECTION TITLES (editorial impact) */
+.section-title,
+.projects h2,
+.media-section h2,
+.about-section h2 {
+    font-family: var(--font-title);
+    font-size: var(--step-h2);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #0b0b0b;
+}
+
+/* PROJETOS: títulos dos projetos usam --font-body para clareza técnica */
+.project-card,
+.project-card * {
+    font-family: var(--font-body);
+}
+
+.project-card .project-header h3,
+.project-card h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.25rem);
+    margin: 0 0 0.35rem 0;
+}
+
+.project-card p,
+.project-card .project-description {
+    font-family: var(--font-body);
+    font-size: var(--step-body);
+    line-height: var(--line-height-body);
+    color: var(--text-dark);
+}
+
+.project-tags,
+.project-tags .tag,
+.tag {
+    font-family: var(--font-body);
+    font-size: var(--step-small);
+    padding: 0.25rem 0.5rem;
+    background: rgba(0,0,0,0.04);
+    border-radius: 6px;
+    letter-spacing: var(--tech-tag-letter-spacing);
+    text-transform: none;
+    font-weight: 500;
+    color: #111;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* QUALIFICAÇÕES E CERTIFICAÇÕES: interface densa com foco em legibilidade (Manrope) */
+.qualifications-container,
+.qualification-item,
+.merits-container,
+.merit-item {
+    font-family: var(--font-body);
+    font-size: var(--step-body);
+    line-height: var(--line-height-body);
+    color: var(--text-dark);
+}
+
+.qualification-item h3,
+.merit-item h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(1rem, 1.1vw + 0.9rem, 1.125rem);
+    margin-bottom: 0.5rem;
+}
+
+/* NA MÍDIA */
+.media-card__source,
+.media-card__content h3 {
+    font-family: var(--font-title);
+}
+
+.media-card__content p {
+    font-family: var(--font-body);
+    font-size: var(--step-body);
+    line-height: var(--line-height-body);
+    color: var(--text-light);
+}
+
+/* SOBRE: editorial body copy */
+.about-content .about-text p {
+    font-family: var(--font-body);
+    font-size: var(--step-body);
+    line-height: var(--line-height-body);
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.about-content .about-text h3,
+.about-contact h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+}
+
+/* Utility: small meta and kicker use body font */
+.meta,
+.kicker,
+.eyebrow,
+.media-card__source {
+    font-family: var(--font-body);
+    font-size: var(--step-small);
+    color: var(--text-light);
+}
+
+@media (max-width: 680px){
+    .hero .hero-headline { font-size: clamp(1.8rem, 6.5vw + 0.5rem, 3.25rem); }
 }
 
 .theme-toggle {
