@@ -34,7 +34,7 @@
         --line-height-body: 1.65;
 
         /* Responsive scale */
-        --step-hero: clamp(2.75rem, 4.5vw + 1.25rem, 5.25rem);
+        --step-hero: clamp(2rem, 3.5vw + 1rem, 3rem); /* reduced for better balance */
         --step-h2:   clamp(1.6rem, 2.4vw + 0.6rem, 2.25rem);
         --step-body: clamp(1rem, 0.45vw + 0.9rem, 1.125rem);
         --step-small:clamp(0.72rem, 0.35vw + 0.5rem, 0.875rem);
@@ -565,6 +565,21 @@ header .hero-subtitle {
     .hero .hero-headline { font-size: clamp(1.8rem, 6.5vw + 0.5rem, 3.25rem); }
 }
 
+/* Quick fix: ensure hero title sits above the profile image */
+.hero .hero-headline,
+.hero-headline {
+    position: relative; /* enable z-index */
+    z-index: 20; /* bring title to front */
+}
+
+/* Lower stacking context for the image/card to avoid covering the headline */
+.hero-figure,
+.hero-image-wrapper,
+.hero-image {
+    position: relative;
+    z-index: 1;
+}
+
 .theme-toggle {
     display: inline-flex;
     align-items: center;
@@ -683,6 +698,62 @@ header .hero-subtitle {
     padding: 8rem 0;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--bg-white);
+}
+
+/* HERO LAYOUT (Grid) — mantém título à esquerda e imagem à direita sem sobreposição */
+.hero .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 400px); /* increase right column capacity for larger image */
+    align-items: center;
+    gap: 2.5rem;
+    padding: 3rem 0;
+}
+
+.hero .hero-copy {
+    max-width: 50%; /* slightly narrower to balance larger image */
+    width: 100%;
+}
+
+.hero .hero-figure {
+    justify-self: end;
+    width: 100%;
+}
+
+.hero-image-wrapper {
+    max-width: 400px; /* allow bigger portrait but within 400px */
+    width: 100%;
+}
+
+.hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Prevent headline from intruding into the image area */
+.hero .hero-copy,
+.hero .hero-headline {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Responsive: stack vertically on small viewports */
+@media (max-width: 900px) {
+    .hero .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 2rem 0;
+    }
+    .hero .hero-figure {
+        justify-self: center;
+        width: min(60%, 320px);
+    }
+    .hero .hero-copy {
+        max-width: 100%;
+    }
 }
 
 .hero-grid {
@@ -1177,3 +1248,4 @@ header .hero-subtitle {
         gap: 1rem;
     }
 }
+
