@@ -33,6 +33,100 @@ const applyTheme = (theme, themeToggle) => {
     }
 };
 
+const getSavedAccessibilitySettings = () => ({
+    accessMode: safeStorage.getItem('accessibility-mode') || 'default',
+    colorFilter: safeStorage.getItem('color-filter') || 'default'
+});
+
+const applyAccessibilitySettings = ({ accessMode, colorFilter }) => {
+    document.body.classList.toggle('high-contrast', accessMode === 'high-contrast');
+    document.body.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
+
+    if (colorFilter !== 'default') {
+        document.body.classList.add(colorFilter);
+    }
+
+    const options = document.querySelectorAll('.accessibility-option');
+    options.forEach(button => {
+        if (button.dataset.accessMode) {
+            button.setAttribute('aria-pressed', String(button.dataset.accessMode === accessMode));
+        }
+        if (button.dataset.colorFilter) {
+            button.setAttribute('aria-pressed', String(button.dataset.colorFilter === colorFilter));
+        }
+    });
+};
+
+const saveAccessibilitySettings = ({ accessMode, colorFilter }) => {
+    safeStorage.setItem('accessibility-mode', accessMode);
+    safeStorage.setItem('color-filter', colorFilter);
+};
+
+const wasAccessibilityPanelDismissed = () => safeStorage.getItem('accessibility-panel-dismissed') === 'true';
+const setAccessibilityPanelDismissed = (dismissed) => safeStorage.setItem('accessibility-panel-dismissed', String(dismissed));
+
+const initAccessibilityPanel = () => {
+    const panel = document.getElementById('accessibilityPanel');
+    const openButton = document.getElementById('accessibilityOpen');
+    const closeButton = document.getElementById('accessibilityClose');
+    const okButton = document.getElementById('accessibilityOk');
+    const resetButton = document.getElementById('accessibilityReset');
+    const options = document.querySelectorAll('.accessibility-option');
+
+    if (!panel || !openButton) return;
+
+    const togglePanel = (open) => {
+        panel.hidden = !open;
+        openButton.setAttribute('aria-expanded', String(open));
+        if (open) {
+            closeButton?.focus();
+        }
+    };
+
+    openButton.addEventListener('click', () => togglePanel(panel.hidden));
+    closeButton?.addEventListener('click', () => togglePanel(false));
+    okButton?.addEventListener('click', () => {
+        setAccessibilityPanelDismissed(true);
+        togglePanel(false);
+        openButton.focus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !panel.hidden) {
+            togglePanel(false);
+        }
+    });
+
+    options.forEach(button => {
+        button.addEventListener('click', () => {
+            const current = getSavedAccessibilitySettings();
+            const next = {
+                accessMode: current.accessMode,
+                colorFilter: current.colorFilter
+            };
+
+            if (button.dataset.accessMode) {
+                next.accessMode = button.dataset.accessMode;
+            }
+            if (button.dataset.colorFilter) {
+                next.colorFilter = button.dataset.colorFilter;
+            }
+
+            applyAccessibilitySettings(next);
+            saveAccessibilitySettings(next);
+        });
+    });
+
+    resetButton?.addEventListener('click', () => {
+        const defaultSettings = { accessMode: 'default', colorFilter: 'default' };
+        applyAccessibilitySettings(defaultSettings);
+        saveAccessibilitySettings(defaultSettings);
+    });
+
+    applyAccessibilitySettings(getSavedAccessibilitySettings());
+    togglePanel(!wasAccessibilityPanelDismissed());
+};
+
 const init3DTilt = () => {
     const cards = document.querySelectorAll('.card-3d');
     
@@ -221,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initThemeSwitcher(themeToggle);
     applyTheme(getInitialTheme(), themeToggle);
+    initAccessibilityPanel();
     initTypewriter();
     initScrollReveal();
     init3DTilt();

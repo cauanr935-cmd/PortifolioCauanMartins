@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cauan Martins - Portfólio</title>
+    <title>Cauan Martins - Portifólio</title>
     <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Ir para o conteúdo principal</a>
+
+    <svg aria-hidden="true" width="0" height="0" style="position:absolute; left:-9999px; top:-9999px; visibility:hidden;">
+        <filter id="filter-protanopia" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/>
+        </filter>
+        <filter id="filter-deuteranopia" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/>
+        </filter>
+        <filter id="filter-tritanopia" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/>
+        </filter>
+    </svg>
+
+    <button id="accessibilityOpen" class="accessibility-trigger" type="button" aria-expanded="false" aria-controls="accessibilityPanel">
+        Ajustes de Acessibilidade
+    </button>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -18,6 +36,32 @@
             </div>
         </div>
     </header>
+
+    <aside id="accessibilityPanel" class="accessibility-panel" aria-label="Ajustes de acessibilidade" hidden>
+        <div class="accessibility-panel__header">
+            <h2>Ajustes de Acessibilidade</h2>
+            <button id="accessibilityClose" class="accessibility-close" type="button" aria-label="Fechar painel de acessibilidade">✕</button>
+        </div>
+        <div class="accessibility-panel__group">
+            <p class="accessibility-panel__label">Tema de contraste</p>
+            <button type="button" class="accessibility-option" data-access-mode="default" aria-pressed="true">Padrão</button>
+            <button type="button" class="accessibility-option" data-access-mode="high-contrast" aria-pressed="false">Alto Contraste</button>
+        </div>
+        <div class="accessibility-panel__group">
+            <p class="accessibility-panel__label">Simulação de daltonismo</p>
+            <button type="button" class="accessibility-option" data-color-filter="default" aria-pressed="true">Normal</button>
+            <button type="button" class="accessibility-option" data-color-filter="protanopia" aria-pressed="false">Protanopia</button>
+            <button type="button" class="accessibility-option" data-color-filter="deuteranopia" aria-pressed="false">Deuteranopia</button>
+            <button type="button" class="accessibility-option" data-color-filter="tritanopia" aria-pressed="false">Tritanopia</button>
+            <button type="button" class="accessibility-option" data-color-filter="achromatopsia" aria-pressed="false">Acromatopsia</button>
+        </div>
+        <div class="accessibility-panel__footer">
+            <button type="button" id="accessibilityOk" class="accessibility-ok">OK</button>
+            <button type="button" id="accessibilityReset" class="accessibility-reset">Redefinir Ajustes</button>
+        </div>
+    </aside>
+
+    <main id="main-content">
 
     <!-- Home Section -->
     <section id="home" class="section hero">
@@ -135,6 +179,103 @@
         </div>
     </section>
 
+    <section id="midia" class="section">
+        <div class="container">
+            <h2 class="section-title">Na Mídia</h2>
+            <p class="section-subtitle">Destaques da minha trajetória em matérias e reportagens.</p>
+            <div class="media-grid">
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/Conquistas.jpeg" alt="Capa do vídeo no YouTube" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">YouTube</span>
+                        <h3>Vídeo Biográfico produzido sobre minha trajetória</h3>
+                        <p>Assista ao conteúdo mais recente que destaca parte importante da minha trajetória.</p>
+                        <a class="media-card__link" href="https://youtu.be/xSrdGEnZcC0?si=e47Wtg29515eZ2FV" target="_blank" rel="noopener noreferrer" aria-label="Assistir o vídeo no YouTube">Ver no YouTube ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/MedalhistaObmep.png" alt="Capa do YouTube Shorts sobre o destaque na educação" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">YouTube</span>
+                        <h3>Destaque na Educação</h3>
+                        <p>Prêmio bola de ouro do IP 2024.</p>
+                        <a class="media-card__link" href="https://www.youtube.com/shorts/E4Qa3r9ypiM" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa do YouTube Shorts sobre destaque na educação">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/PonteDay.jpg" alt="Capa da matéria do Instituto Ponte sobre Ponte Day 2026 SP" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">Instituto Ponte</span>
+                        <h3>Ponte Day 2026 SP</h3>
+                        <p>Cobertura do evento Ponte Day 2026 em São Paulo, celebrando resultados recordes.</p>
+                        <a class="media-card__link" href="https://www.institutoponte.org.br/noticias/ponte-day-2026-sp-recorde/" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa do Instituto Ponte sobre Ponte Day 2026 SP">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/Omifce22.jpg" alt="Capa da matéria da Prefeitura de Jaguaruana sobre aluno campeão na olimpíada" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">Prefeitura de Jaguaruana</span>
+                        <h3>Aluno de escola jaguaruanense é campeão na Olimpíada</h3>
+                        <p>Reconhecimento da Prefeitura do Ceará pelo excelente desempenho e conquista de medalha em olimpíada de conhecimento.</p>
+                        <a class="media-card__link" href="https://jaguaruana.ce.gov.br/informa/1905/aluno-de-escola-jaguaruanense-campe-o-na-olimp-ada" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa da Prefeitura de Jaguaruana sobre aluno campeão na Olimpíada">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/C7S-Foguetes.png" alt="Capa da matéria da Editorial Brasil sobre destaque dos alunos" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">Editorial Brasil</span>
+                        <h3>Alunos do colégio 7 de setembro realizam melhor lançamento de foguetes do estado</h3>
+                        <p>Matéria destacando a performance de excelência e dedicação acadêmica no Colégio 7 de Setembro.</p>
+                        <a class="media-card__link" href="https://www.editorialbrasil.com.br/2025/05/alunos-do-colegio-7-de-setembro.html" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa da Editorial Brasil sobre destaque dos alunos do Colégio 7 de Setembro">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/homenagemEvento.jpeg" alt="Capa da matéria da Prefeitura de Jaguaruana sobre destaque dos alunos do 9º ano" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">Prefeitura de Jaguaruana</span>
+                        <h3>Ex-aluno da rede municipal retorna para ter palestra com alunos do 9º ano</h3>
+                        <p>Homenagem e reconhecimento aos alunos da rede pública por seus méritos acadêmicos.</p>
+                        <a class="media-card__link" href="https://www.jaguaruana.ce.gov.br/informa/4191/alunos-do-9-ano-da-rede-p-blica-municipal-de-jagua" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa da Prefeitura de Jaguaruana sobre destaque dos alunos do 9º ano">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/C7S-Foguetes.png" alt="Capa da matéria de Giro na Cidade sobre medalha de ouro na Olimpíada Cearense de Foguetes" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">Giro na Cidade</span>
+                        <h3>Estudantes do Colégio 7 de Setembro conquistam ouro na Olimpíada Cearense de Foguetes</h3>
+                        <p>Reportagem celebrando a conquista da medalha de ouro na Olimpíada Cearense de Foguetes (OCF).</p>
+                        <a class="media-card__link" href="https://gironacidade.com.br/estudantes-do-colegio-7-de-setembro-conquistam-ouro-na-olimpiada-cearense-de-foguetes/" target="_blank" rel="noopener noreferrer" aria-label="Ler matéria completa de Giro na Cidade sobre estudantes do Colégio 7 de Setembro">Ler matéria completa ↗</a>
+                    </div>
+                </article>
+                <article class="media-card reveal">
+                    <figure class="media-card__cover">
+                        <img src="assets/ponted25.jpeg" alt="Capa do vídeo no YouTube sobre o destaque em mídia" loading="lazy">
+                    </figure>
+                    <div class="media-card__content">
+                        <span class="media-card__source">YouTube</span>
+                        <h3>Primeiro lugar no Ponted 2025</h3>
+                        <p>Assista ao vídeo que conta parte relevante da minha trajetória.</p>
+                        <a class="media-card__link" href="https://youtu.be/P-9lKvo9W9I" target="_blank" rel="noopener noreferrer" aria-label="Assistir o vídeo no YouTube">Ver no YouTube ↗</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- Sobre Section -->
     <section id="sobre" class="section">
         <div class="container">
@@ -174,6 +315,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
