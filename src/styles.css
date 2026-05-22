@@ -493,15 +493,18 @@ header .hero-subtitle {
 .tag {
     font-family: var(--font-body);
     font-size: var(--step-small);
-    padding: 0.25rem 0.5rem;
-    background: rgba(0,0,0,0.04);
+    padding: 0.4rem 0.8rem; /* Aumentado para dar mais leitura */
+    background: var(--color-surface-soft, rgba(255, 255, 255, 0.1)); /* Fundo suave adaptativo */
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15)); /* Borda adaptativa */
     border-radius: 6px;
     letter-spacing: var(--tech-tag-letter-spacing);
     text-transform: none;
-    font-weight: 500;
-    color: #111;
-    display: inline-block;
-    margin-right: 0.5rem;
+    font-weight: 600; /* Peso aumentado para melhorar a legibilidade */
+    color: var(--text-dark, #111111); /* COR INVERTIDA: Usa a variável que fica clara no Dark Mode e escura no Light Mode! */
+    display: inline-flex;
+    align-items: center;
+    margin: 0.25rem 0.5rem 0.25rem 0;
+    transition: var(--transition);
 }
 
 /* QUALIFICAÇÕES E CERTIFICAÇÕES: interface densa com foco em legibilidade (Manrope) */
@@ -1247,5 +1250,12 @@ header .hero-subtitle {
     .projects-grid {
         gap: 1rem;
     }
+    /* ===== Acessibilidade: Alto Contraste para as Tags ===== */
+.high-contrast .tag,
+.high-contrast .project-tags .tag {
+    background-color: var(--high-contrast-bg) !important;
+    color: var(--high-contrast-accent) !important;
+    border: 2px solid var(--high-contrast-accent) !important;
+}
 }
 
